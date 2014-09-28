@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
-
+import android.util.Log;
 
 
 /**
@@ -79,7 +79,7 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
 		if (wifiState | mobileState) { // 判断是否正在使用WIFI网络
 			success = true;
 		}
-//		Log.i(TAG + ":%s,%s=%s", "网络状态改变:" + success,mobileNetName,mobileState + "");
+		Log.i(TAG ,String.format("%s:%b,%s状态:%s","wifi状态:" , wifiState, mobileNetName, mobileState + ""));
 //		OperateSharePreferences.getInstance().saveNetState(success);
 
 	}

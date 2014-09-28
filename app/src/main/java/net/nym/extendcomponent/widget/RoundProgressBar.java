@@ -12,7 +12,7 @@ import android.view.View;
 
 import net.nym.extendcomponent.R;
 
-
+//  values/roundprogressbar_attrs.xml
 /** 
  * 仿iphone带进度的进度条，线程安全的View，可直接在线程中更新进度 
  * @author xiaanming 

@@ -6,13 +6,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MyActivity$PlaceholderFragment">
+    tools:context="net.nym.extendcomponent.test.TestZoomImageViewActivity">
 
-
-    <ListView
-        android:id="@+id/listView"
+    <net.nym.extendcomponent.widget.ZoomImageView
+        android:id="@+id/detail_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:gravity="center"
+        android:src="@drawable/ic_launcher"
+        android:scaleType="fitCenter" />
+
 </RelativeLayout>

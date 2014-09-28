@@ -23,6 +23,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".test.TestParcelableActivity"
+            android:label="@string/title_activity_test_parcelable" >
+        </activity>
+        <activity
+            android:name=".test.TestRoundProgressBarActivity"
+            android:label="@string/title_activity_test_round_progress_bar" >
+        </activity>
+        <activity
+            android:name=".test.TestZoomImageViewActivity"
+            android:label="@string/title_activity_test_zoom_image_view" >
+        </activity>
     </application>
 
 </manifest>

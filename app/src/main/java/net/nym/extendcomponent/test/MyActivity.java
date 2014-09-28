@@ -1,19 +1,30 @@
 package net.nym.extendcomponent.test;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import net.nym.extendcomponent.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MyActivity extends ActionBarActivity
@@ -49,22 +60,24 @@ public class MyActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, PlaceholderFragment.newInstance(position ))
                 .commit();
     }
 
     public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
+        String[] sections = getResources().getStringArray(R.array.sections);
+        mTitle = sections[number];
+//        switch (number) {
+//            case 0:
+//                mTitle = getString(R.string.title_section1);
+//                break;
+//            case 1:
+//                mTitle = getString(R.string.title_section2);
+//                break;
+//            case 2:
+//                mTitle = getString(R.string.title_section3);
+//                break;
+//        }
     }
 
     public void restoreActionBar() {
@@ -110,6 +123,7 @@ public class MyActivity extends ActionBarActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        ArrayList<HashMap<String,Object>> data = new ArrayList<HashMap<String, Object>>();
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -129,6 +143,38 @@ public class MyActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_my, container, false);
+            data.clear();
+            /*添加数据*/
+            HashMap<String,Object> map;
+            switch (getArguments().getInt(ARG_SECTION_NUMBER))
+            {
+                case 0:
+                    map = new HashMap<String, Object>();
+                    map.put("name","Parcelable");
+                    map.put("class",TestParcelableActivity.class);
+                    data.add(map);
+                    break;
+                case 1:
+                    map = new HashMap<String, Object>();
+                    map.put("name","RoundProgressBar");
+                    map.put("class",TestRoundProgressBarActivity.class);
+                    data.add(map);
+                    map = new HashMap<String, Object>();
+                    map.put("name","ZoomImageView");
+                    map.put("class",TestZoomImageViewActivity.class);
+                    data.add(map);
+                    break;
+            }
+            ListView listView = (ListView) rootView.findViewById(R.id.listView);
+            listView.setAdapter(mAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), (Class<?>) data.get(position).get("class"));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            });
             return rootView;
         }
 
@@ -138,6 +184,35 @@ public class MyActivity extends ActionBarActivity
             ((MyActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+
+        private BaseAdapter mAdapter = new BaseAdapter(){
+            @Override
+            public int getCount() {
+                return data.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                if (convertView == null)
+                    convertView = new TextView(getActivity());
+                TextView text = (TextView) convertView;
+                text.setPadding(10,10,10,10);
+                text.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+                text.setText(data.get(position).get("name") + "");
+                return convertView;
+            }
+        };
+
     }
 
 }

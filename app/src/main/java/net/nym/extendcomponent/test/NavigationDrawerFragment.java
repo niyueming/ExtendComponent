@@ -1,5 +1,6 @@
-package net.nym.extendcomponent;
+package net.nym.extendcomponent.test;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -21,6 +22,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import net.nym.extendcomponent.R;
+import net.nym.extendcomponent.entity.ProductInfo;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.

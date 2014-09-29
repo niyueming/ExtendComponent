@@ -11,7 +11,11 @@ import android.util.Log;
 /**
  * 类 <code>NetBroadcastReceiver</code>
  * 监听网络状态变化
- * 
+ * <uses-permission android:name="android.permission.INTERNET" />
+ * <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+ * <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+ * <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+ * <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
  * @author nym
  * @version 2013-6-4
  * @since 
@@ -76,10 +80,10 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
 			}
 		}
 		
-		if (wifiState | mobileState) { // 判断是否正在使用WIFI网络
+		if (wifiState | mobileState) { // 判断是否正在使用网络
 			success = true;
 		}
-		Log.i(TAG ,String.format("%s:%b,%s状态:%s","wifi状态:" , wifiState, mobileNetName, mobileState + ""));
+		Log.i(TAG ,String.format("%s:%b,%s状态:%s","wifi状态" , wifiState, mobileNetName, mobileState + ""));
 //		OperateSharePreferences.getInstance().saveNetState(success);
 
 	}

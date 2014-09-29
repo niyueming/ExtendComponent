@@ -7,10 +7,13 @@ import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import net.nym.extendcomponent.common.DebugConfig;
 
 /****
  * 这里你要明白几个方法执行的流程： 首先ImageView是继承自View的子类.
@@ -87,12 +90,17 @@ public class ZoomImageView extends ImageView {
 		
 		screen_W = displayMetrics.widthPixels;
 		screen_H = displayMetrics.heightPixels;
-		
+
 		MAX_W = (int) (screen_W * maxScale);
 		MAX_H = (int) (screen_H * maxScale);
 
 		MIN_W = (int) (screen_W *minScale);
 		MIN_H = (int) (screen_H *minScale);
+
+        if (DebugConfig.isDebug())
+        {
+            Log.i(DebugConfig.TAG_BEDUG,String.format("初始化：MAX_W=%d,MAX_H=%d,MIN_W=%d,MIN_H=%d,maxScale=%f,minScale=%f",MAX_W,MAX_H,MIN_W,MIN_H,maxScale,minScale));
+        }
 	}
 	
 	@Override
@@ -444,7 +452,10 @@ public class ZoomImageView extends ImageView {
 				top = Math.max(top, start_Top);
 				right = Math.min(right, start_Right);
 				bottom = Math.min(bottom, start_Bottom);
-//                Log.e("jj", "top="+top+",bottom="+bottom+",left="+left+",right="+right);
+                if (DebugConfig.isDebug())
+                {
+                    Log.e("jj", "top="+top+",bottom="+bottom+",left="+left+",right="+right);
+                }
 				onProgressUpdate(new Integer[] { left, top, right, bottom });
 				try {
 					Thread.sleep(10);
@@ -516,7 +527,10 @@ public class ZoomImageView extends ImageView {
 					top = Math.min(top, start_Top);
 					right = Math.max(right, start_Right);
 					bottom = Math.max(bottom, start_Bottom);
-//	                Log.e("jj", "top="+top+",bottom="+bottom+",left="+left+",right="+right);
+                    if (DebugConfig.isDebug())
+                    {
+                        Log.e("jj", "top="+top+",bottom="+bottom+",left="+left+",right="+right);
+                    }
 					onProgressUpdate(new Integer[] { left, top, right, bottom });
 					try {
 						Thread.sleep(10);

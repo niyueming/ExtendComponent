@@ -163,6 +163,10 @@ public class MyActivity extends ActionBarActivity
                     map.put("name","ZoomImageView");
                     map.put("class",TestZoomImageViewActivity.class);
                     data.add(map);
+                    map = new HashMap<String, Object>();
+                    map.put("name","webView");
+                    map.put("class",TestWebViewActivity.class);
+                    data.add(map);
                     break;
             }
             ListView listView = (ListView) rootView.findViewById(R.id.listView);

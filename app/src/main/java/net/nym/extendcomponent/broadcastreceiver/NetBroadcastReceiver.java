@@ -27,7 +27,6 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
 	private final String TAG = NetBroadcastReceiver.class.getSimpleName();
 	@Override
 	public void onReceive(Context arg0, Intent arg1) {
-		// TODO Auto-generated method stub
 //		Log.i(TAG + ":%s", "网络状态改变");
 
 		boolean success = false;

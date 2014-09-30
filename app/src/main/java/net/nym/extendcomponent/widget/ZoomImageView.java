@@ -119,7 +119,6 @@ public class ZoomImageView extends ImageView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// TODO Auto-generated method stub
 			/** 处理单点、多点触摸 **/
 			switch (event.getAction() & MotionEvent.ACTION_MASK) {
 			case MotionEvent.ACTION_DOWN:

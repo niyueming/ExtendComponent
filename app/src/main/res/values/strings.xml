@@ -3,6 +3,11 @@
 
     <string name="app_name">ExtendComponent</string>
     <string name="hello_world">Hello world!</string>
+
+    <!-- extend component string -->
+    <string name="ec_hint">提示</string>
+    <string name="ec_conform">确定</string>
+    <string name="ec_concel">取消</string>
     <!--
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -15,5 +20,6 @@
     <string name="title_activity_test_parcelable">TestParcelableActivity</string>
     <string name="title_activity_test_round_progress_bar">TestRoundProgressBarActivity</string>
     <string name="title_activity_test_zoom_image_view">TestZoomImageViewActivity</string>
+    <string name="title_activity_test_web_view">TestWebViewActivity</string>
 
 </resources>

@@ -19,7 +19,6 @@ public class BaseApplication extends Application {
 
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
 
 		IntentFilter filter = new IntentFilter(
@@ -42,7 +41,6 @@ public class BaseApplication extends Application {
 
 	@Override
 	public void onTerminate() {
-		// TODO Auto-generated method stub
 		super.onTerminate();
 		unregisterReceiver(mNetReceiver);
 	}

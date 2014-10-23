@@ -94,10 +94,15 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
 		}
 		Log.i(TAG ,String.format("%s:%b,%s状态:%s","wifi状态" , wifiState, mobileNetName, mobileState + ""));
 //		OperateSharePreferences.getInstance().saveNetState(success);
-        for (OnConnectivityChangeListener lisener : mLiseners)
+        for (int i = 0 ;i < mLiseners.size();i++)
         {
-            if (lisener != null)
-                lisener.onChange(success, wifiState, networkType, mobileNetName);
+            if (mLiseners.get(i) == null) {
+                mLiseners.remove(i);
+                i--;
+            }
+            else {
+                mLiseners.get(i).onChange(success, wifiState, networkType, mobileNetName);
+            }
         }
 	}
     public static interface OnConnectivityChangeListener{

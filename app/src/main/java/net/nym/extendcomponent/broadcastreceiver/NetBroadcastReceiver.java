@@ -1,4 +1,5 @@
 package net.nym.extendcomponent.broadcastreceiver;
+import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +7,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 
 /**
@@ -16,6 +19,9 @@ import android.util.Log;
  * <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
  * <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
  * <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+ *
+ * IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+ *
  * @author nym
  * @version 2013-6-4
  * @since 
@@ -25,6 +31,7 @@ import android.util.Log;
 public class NetBroadcastReceiver extends BroadcastReceiver {
 
 	private final String TAG = NetBroadcastReceiver.class.getSimpleName();
+    private ArrayList<OnConnectivityChangeListener> mLiseners = ConnectivityUtils.getOnConnectivityChangeListeners();
 	@Override
 	public void onReceive(Context arg0, Intent arg1) {
 //		Log.i(TAG + ":%s", "网络状态改变");
@@ -48,13 +55,16 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
 		}
 		
 		NetworkInfo  mobileInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        int networkType = 0;
 		if(mobileInfo != null)
 		{
+
 			if(mobileInfo.isConnected())
 			{
 				mobileState = true;
 			}
-			switch (mobileInfo.getSubtype()) {
+            networkType = mobileInfo.getSubtype();
+            switch (mobileInfo.getSubtype()) {
 			case TelephonyManager.NETWORK_TYPE_UMTS:
 			case TelephonyManager.NETWORK_TYPE_HSDPA:
 				mobileNetName = "联通3G";
@@ -84,7 +94,13 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
 		}
 		Log.i(TAG ,String.format("%s:%b,%s状态:%s","wifi状态" , wifiState, mobileNetName, mobileState + ""));
 //		OperateSharePreferences.getInstance().saveNetState(success);
-
+        for (OnConnectivityChangeListener lisener : mLiseners)
+        {
+            if (lisener != null)
+                lisener.onChange(success, wifiState, networkType, mobileNetName);
+        }
 	}
-
+    public static interface OnConnectivityChangeListener{
+        void onChange(boolean hasNet,boolean isWifi,int networkType,String networkTypeName);
+    }
 }

@@ -1,7 +1,7 @@
-MUtils
+ExtendComponent
 ======
 
-工具类库和各种例子，慢慢添加
+android的控件扩展
 
 ### License
 ```

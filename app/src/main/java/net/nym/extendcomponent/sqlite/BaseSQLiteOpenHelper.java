@@ -357,6 +357,11 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper {
                     //不要static修饰的属性
                     continue;
                 }
+
+                if("_id".equals(item.getName()))
+                {
+                    continue;
+                }
                 boolean accessFlag = item.isAccessible();
                 /**
                  * 设置是否有权限访问反射类中的私有属性的
@@ -367,7 +372,7 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper {
                 {
                     item.set(record,cursor.getString(cursor.getColumnIndex(item.getName())));
                 }
-                else if ("class java.lang.Integer".equals(item.getType()) | "int".equals(type))
+                else if ("class java.lang.Integer".equals(type) | "int".equals(type))
                 {
                     item.setInt(record, cursor.getInt(cursor.getColumnIndex(item.getName())));
                 }

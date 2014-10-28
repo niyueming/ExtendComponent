@@ -23,27 +23,7 @@ public class ProductInfo extends Entity implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-        Field[] fields = ProductInfo.class.getDeclaredFields();
-        Arrays.sort(fields,mComparator);
-        try {
-            for (Field field : fields)
-            {
-                if (Modifier.toString(field.getModifiers()).contains("static"))
-                {
-                    //不要static修饰的属性
-                    continue;
-                }
-                boolean accessFlag = field.isAccessible();
-                /**
-                 * 设置是否有权限访问反射类中的私有属性的
-                 * */
-                field.setAccessible(true);
-                dest.writeValue(field.get(this));
-                field.setAccessible(accessFlag);
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        readObject(dest,this);
 //		 dest.writeString(isBest);
 //		 dest.writeString(isNew);
 //		 dest.writeString(isHot);
@@ -61,31 +41,11 @@ public class ProductInfo extends Entity implements Parcelable {
 //		 dest.writeString(rec_id);
 	}
 
-	public static final Creator<ProductInfo> CREATOR = new Creator<ProductInfo>() {
+    public static final Creator<ProductInfo> CREATOR = new Creator<ProductInfo>() {
 		@Override
 		public ProductInfo createFromParcel(Parcel source) {
 			ProductInfo mMember = new ProductInfo();
-            Field[] fields = ProductInfo.class.getDeclaredFields();
-            Arrays.sort(fields,mComparator);
-            try {
-                for (Field field : fields)
-                {
-                    if (Modifier.toString(field.getModifiers()).contains("static"))
-                    {
-                        //不要static修饰的属性
-                        continue;
-                    }
-                    boolean accessFlag = field.isAccessible();
-                    /**
-                     * 设置是否有权限访问反射类中的私有属性的
-                     * */
-                    field.setAccessible(true);
-                    field.set(mMember,source.readValue(ProductInfo.class.getClassLoader()));
-                    field.setAccessible(accessFlag);
-                }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            writeObject(source, mMember);
 //			mMember.isBest = source.readString();
 //			mMember.isNew = source.readString();
 //			mMember.isHot = source.readString();
@@ -110,7 +70,9 @@ public class ProductInfo extends Entity implements Parcelable {
 		}
 	};
 
-	private String rec_id;	//购物车id
+
+
+    private String rec_id;	//购物车id
 	private String isBest;
 	private String isNew;
 	private String isHot;

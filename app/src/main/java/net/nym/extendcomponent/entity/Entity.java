@@ -2,8 +2,11 @@ package net.nym.extendcomponent.entity;
 
 
 
+import android.os.Parcel;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.Comparator;
 
 /**类Entity
@@ -58,6 +61,54 @@ public abstract class Entity {
                 item.setAccessible(true);
                 sb.append(item.getName()).append(":").append(item.get(this) + "").append(",");
                 item.setAccessible(accessFlag);
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected static void writeObject(Parcel source, Object mMember) {
+        Field[] fields = mMember.getClass().getDeclaredFields();
+        Arrays.sort(fields, mComparator);
+        try {
+            for (Field field : fields)
+            {
+                if (Modifier.toString(field.getModifiers()).contains("static"))
+                {
+                    //不要static修饰的属性
+                    continue;
+                }
+                boolean accessFlag = field.isAccessible();
+                /**
+                 * 设置是否有权限访问反射类中的私有属性的
+                 * */
+                field.setAccessible(true);
+                field.set(mMember, source.readValue(mMember.getClass().getClassLoader()));
+                field.setAccessible(accessFlag);
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void readObject(Parcel dest,Object mMember) {
+        Field[] fields = mMember.getClass().getDeclaredFields();
+        Arrays.sort(fields, mComparator);
+        try {
+            for (Field field : fields)
+            {
+                if (Modifier.toString(field.getModifiers()).contains("static"))
+                {
+                    //不要static修饰的属性
+                    continue;
+                }
+                boolean accessFlag = field.isAccessible();
+                /**
+                 * 设置是否有权限访问反射类中的私有属性的
+                 * */
+                field.setAccessible(true);
+                dest.writeValue(field.get(mMember));
+                field.setAccessible(accessFlag);
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();

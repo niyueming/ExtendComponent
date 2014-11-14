@@ -87,6 +87,33 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
 			default:
 				break;
 			}
+
+//            switch (networkType) {
+//                case TelephonyManager.NETWORK_TYPE_GPRS:
+//                case TelephonyManager.NETWORK_TYPE_EDGE:
+//                case TelephonyManager.NETWORK_TYPE_CDMA:
+//                case TelephonyManager.NETWORK_TYPE_1xRTT:
+//                case TelephonyManager.NETWORK_TYPE_IDEN:
+//                    mobileNetName = "2G";
+//                    break;//NETWORK_CLASS_2_G;
+//                case TelephonyManager.NETWORK_TYPE_UMTS:
+//                case TelephonyManager.NETWORK_TYPE_EVDO_0:
+//                case TelephonyManager.NETWORK_TYPE_EVDO_A:
+//                case TelephonyManager.NETWORK_TYPE_HSDPA:
+//                case TelephonyManager.NETWORK_TYPE_HSUPA:
+//                case TelephonyManager.NETWORK_TYPE_HSPA:
+//                case TelephonyManager.NETWORK_TYPE_EVDO_B:
+//                case TelephonyManager.NETWORK_TYPE_EHRPD:
+//                case TelephonyManager.NETWORK_TYPE_HSPAP:
+//                    mobileNetName = "3G";
+//                    break;//NETWORK_CLASS_3_G;
+//                case TelephonyManager.NETWORK_TYPE_LTE:
+//                    mobileNetName = "4G";
+//                    break;//NETWORK_CLASS_4_G;
+//                default:
+//                    mobileNetName = "UNKNOWN";
+//                    break;//NETWORK_CLASS_UNKNOWN;
+//            }
 		}
 		
 		if (wifiState | mobileState) { // 判断是否正在使用网络

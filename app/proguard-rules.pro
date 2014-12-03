@@ -56,6 +56,8 @@
 
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
+  <fields>;
+  <methods>;
 }
 
 -keep class net.nym.extendcomponent.webview.JSCall {

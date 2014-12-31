@@ -21,5 +21,16 @@
     <string name="title_activity_test_round_progress_bar">TestRoundProgressBarActivity</string>
     <string name="title_activity_test_zoom_image_view">TestZoomImageViewActivity</string>
     <string name="title_activity_test_web_view">TestWebViewActivity</string>
+    <string name="title_activity_test_lock_pattern">TestLockPatternViewActivity</string>
+
+    <!--LockPattern-->
+    <!-- Accessibility description sent when user starts drawing a lock pattern. -->
+    <string name="lockscreen_access_pattern_start">Pattern started</string>
+    <!-- Accessibility description sent when the pattern times out and is cleared. -->
+    <string name="lockscreen_access_pattern_cleared">Pattern cleared</string>
+    <!-- Accessibility description sent when user adds a cell to the pattern.  -->
+    <string name="lockscreen_access_pattern_cell_added">Cell added</string>
+    <!-- Accessibility description sent when user completes drawing a pattern. -->
+    <string name="lockscreen_access_pattern_detected">Pattern completed</string>
 
 </resources>

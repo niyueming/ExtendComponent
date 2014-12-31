@@ -41,6 +41,10 @@
             android:name=".test.TestWebViewActivity"
             android:label="@string/title_activity_test_web_view" >
         </activity>
+        <activity
+            android:name=".test.TestLockPatternViewActivity"
+            android:label="@string/title_activity_test_web_view" >
+        </activity>
     </application>
 
 </manifest>

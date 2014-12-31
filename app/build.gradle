@@ -19,12 +19,14 @@ android {
     }
     buildTypes {
         release {
-            runProguard true
+            minifyEnabled true      //新版的替代方法
+//            runProguard true
+            shrinkResources true    //配合minifyEnabled true，自动去除没有使用的资源。
             proguardFiles 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
         debug {
-            runProguard false
+            minifyEnabled false
             proguardFiles 'proguard-rules.pro'
         }
     }

@@ -241,6 +241,7 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     /**
      * 以类名为表名，支持的数据类型（String,int/Integer,float/Float,double/Double,long/Long,boolean/Boolean）
+     * 供外部调用
      * @param clazz
      *
      *
@@ -264,7 +265,10 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     }
 
-    public <T extends Entity> void createTable(Class<T> clazz,SQLiteDatabase db)
+    /**
+    * 供onCreate调用
+    * */
+    private <T extends Entity> void createTable(Class<T> clazz,SQLiteDatabase db)
     {
         StringBuffer sb = new StringBuffer("CREATE TABLE ");
         sb.append(clazz.getSimpleName()).append("( ");

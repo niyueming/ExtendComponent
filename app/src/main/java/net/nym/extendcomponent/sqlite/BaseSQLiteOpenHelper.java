@@ -10,12 +10,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
 
+
 import net.nym.extendcomponent.common.BaseApplication;
 import net.nym.extendcomponent.entity.Entities;
 import net.nym.extendcomponent.entity.Entity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+
 
 /**
  * @author nym
@@ -84,7 +86,7 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+//        createTable(PushInfo.class,db);
     }
 
     /**
@@ -113,7 +115,7 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Query the given table, returning a {@link Cursor} over the result set.
+     * Query the given table, returning a {@link android.database.Cursor} over the result set.
      *
      * @param table
      *            The table name to compile the query against.
@@ -143,10 +145,10 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper {
      *            How to order the rows, formatted as an SQL ORDER BY clause
      *            (excluding the ORDER BY itself). Passing null will use the
      *            default sort order, which may be unordered.
-     * @return A {@link Cursor} object, which is positioned before the first
-     *         entry. Note that {@link Cursor}s are not synchronized, see the
+     * @return A {@link android.database.Cursor} object, which is positioned before the first
+     *         entry. Note that {@link android.database.Cursor}s are not synchronized, see the
      *         documentation for more details.
-     * @see Cursor
+     * @see android.database.Cursor
      */
     public Cursor select(String table, String[] columns, String selection,
                          String[] selectionArgs, String groupBy, String having,
@@ -243,7 +245,7 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      *
      */
-    public void createTable(Class<Entity> clazz)
+    public <T extends Entity> void createTable(Class<T> clazz)
     {
         StringBuffer sb = new StringBuffer("CREATE TABLE ");
         sb.append(clazz.getSimpleName()).append("( ");
@@ -262,15 +264,32 @@ public class BaseSQLiteOpenHelper extends SQLiteOpenHelper {
 
     }
 
-    public synchronized long insertToTable(Entity object)
+    public <T extends Entity> void createTable(Class<T> clazz,SQLiteDatabase db)
+    {
+        StringBuffer sb = new StringBuffer("CREATE TABLE ");
+        sb.append(clazz.getSimpleName()).append("( ");
+        string(sb,clazz);
+        sb.append("_id INTEGER PRIMARY KEY AUTOINCREMENT )");
+        db.beginTransaction();
+        try {
+            db.execSQL(sb.toString());
+            db.setTransactionSuccessful();
+            Log.i(TAG,"create table " + clazz.getName() + " successful.");
+        } finally {
+            db.endTransaction();
+        }
+
+    }
+
+    public synchronized <T extends Entity> long insertToTable(T object)
     {
         ContentValues values = mapContentValues(object);
 
         return insert(object.getClass().getSimpleName(),null,values);
     }
 
-    public synchronized int delete(Entity object,String whereClause,
-                                   String[] whereArgs)
+    public synchronized <T extends Entity> int delete(T object,String whereClause,
+                                                      String[] whereArgs)
     {
         return delete(object.getClass().getSimpleName(),whereClause,whereArgs);
     }

@@ -171,6 +171,10 @@ public class MyActivity extends ActionBarActivity
                     map.put("name","lockpattern");
                     map.put("class",TestLockPatternViewActivity.class);
                     data.add(map);
+                    map = new HashMap<String, Object>();
+                    map.put("name","gesturesignature");
+                    map.put("class",TestGestureSignatureActivity.class);
+                    data.add(map);
                     break;
             }
             ListView listView = (ListView) rootView.findViewById(R.id.listView);

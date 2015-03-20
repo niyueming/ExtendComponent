@@ -43,7 +43,11 @@
         </activity>
         <activity
             android:name=".test.TestLockPatternViewActivity"
-            android:label="@string/title_activity_test_web_view" >
+            android:label="@string/title_activity_test_lock_pattern" >
+        </activity>
+        <activity
+            android:name=".test.TestGestureSignatureActivity"
+            android:label="@string/title_activity_test_gesture_signature" >
         </activity>
     </application>
 

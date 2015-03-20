@@ -24,21 +24,6 @@ public class ProductInfo extends Entity implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
         readObject(dest,this);
-//		 dest.writeString(isBest);
-//		 dest.writeString(isNew);
-//		 dest.writeString(isHot);
-//		 dest.writeString(isPromote);
-//		 dest.writeString(saleNumber);
-//		 dest.writeString(shopPrice);
-//		 dest.writeString(marketPrice);
-//		 dest.writeString(name);
-//		 dest.writeString(goodsId);
-//		 dest.writeString(img);
-//		 dest.writeString(pictures);
-//		 dest.writeString(suppliers);
-//		 dest.writeString(promotePrice);
-//		 dest.writeString(collected);
-//		 dest.writeString(rec_id);
 	}
 
     public static final Creator<ProductInfo> CREATOR = new Creator<ProductInfo>() {
@@ -46,21 +31,6 @@ public class ProductInfo extends Entity implements Parcelable {
 		public ProductInfo createFromParcel(Parcel source) {
 			ProductInfo mMember = new ProductInfo();
             writeObject(source, mMember);
-//			mMember.isBest = source.readString();
-//			mMember.isNew = source.readString();
-//			mMember.isHot = source.readString();
-//			mMember.isPromote = source.readString();
-//			mMember.saleNumber = source.readString();
-//			mMember.shopPrice = source.readString();
-//			mMember.marketPrice = source.readString();
-//			mMember.name = source.readString();
-//			mMember.goodsId = source.readString();
-//			mMember.img = source.readString();
-//			mMember.pictures = source.readString();
-//			mMember.suppliers = source.readString();
-//			mMember.promotePrice = source.readString();
-//			mMember.collected = source.readString();
-//			mMember.rec_id = source.readString();
 			return mMember;
 		}
 

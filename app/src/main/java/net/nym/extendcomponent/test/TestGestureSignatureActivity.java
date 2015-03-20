@@ -41,7 +41,7 @@ public class TestGestureSignatureActivity extends ActionBarActivity implements V
     private Button btn_flush,btn_comfirm;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ui_gesture_signature);
+        setContentView(R.layout.activity_test_gesture_signature);
         initTitle();
 
         mGestureOverlayView = (GestureOverlayView) findViewById(R.id.gestureOverlayView);

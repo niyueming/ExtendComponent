@@ -49,6 +49,10 @@
             android:name=".test.TestGestureSignatureActivity"
             android:label="@string/title_activity_test_gesture_signature" >
         </activity>
+        <activity
+            android:name=".test.TestDiagramActivity"
+            android:label="@string/title_activity_test_diagram" >
+        </activity>
     </application>
 
 </manifest>

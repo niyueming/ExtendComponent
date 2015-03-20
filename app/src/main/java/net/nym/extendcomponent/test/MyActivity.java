@@ -175,6 +175,10 @@ public class MyActivity extends ActionBarActivity
                     map.put("name","gesturesignature");
                     map.put("class",TestGestureSignatureActivity.class);
                     data.add(map);
+                    map = new HashMap<String, Object>();
+                    map.put("name","diagram");
+                    map.put("class",TestDiagramActivity.class);
+                    data.add(map);
                     break;
             }
             ListView listView = (ListView) rootView.findViewById(R.id.listView);

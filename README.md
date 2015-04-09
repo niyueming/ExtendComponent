@@ -18,6 +18,5 @@ MUtils is based on or derives from projects below:
   - [XUtils](https://github.com/wyouflf/xUtils.git)
 
 ### Commercial Use
-MUtils is licensed under Apache License v2 or later, so itself is free for commercial use under Apache License v2.
-
-But MUtils is also based on other different projects under various licenses, which I have no idea whether they are compatible to each other or to your product.
+合并到
+- [MUtils](https://github.com/niyueming/MUtils.git)
